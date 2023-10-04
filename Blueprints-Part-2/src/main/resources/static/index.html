@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blueprints</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet"
+        href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" />
+    </head>
+    
+    <body>
+        <h1>Blueprints</h1>
+        <label for="authorInput">Autor:</label>
+        <input type="text" id="printInput" placeholder="Escribe algo..." label="Autor">
+        <button id="getPrintsButton">Get Blueprints</button>
+
+        <h2>Blueprints</h2>
+        <table className="tabla">
+            <tr>
+              <th>Blueprint Name</th>
+              <th>Number of Points</th>
+              <th><button id="openButton">Open</button></th>
+            </tr>
+            <tr>
+              <td>Alfreds Futterkiste</td>
+              <td>Maria Anders</td>
+              <td>Germany</td>
+            </tr>
+            <tr>
+              <td>Centro comercial Moctezuma</td>
+              <td>Francisco Chang</td>
+              <td>Mexico</td>
+            </tr>
+          </table>
+
+        <script>
+            // Aquí puedes agregar tu código JavaScript para manejar el botón
+            document.getElementById("getPrintsButton").addEventListener("click", function() {
+                var inputValue = document.getElementById("printInput").value;
+                alert("Has escrito: " + inputValue);
+            });
+        </script>
+    </body>
+</html>
