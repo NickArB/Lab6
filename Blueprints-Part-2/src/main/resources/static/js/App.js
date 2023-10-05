@@ -41,11 +41,11 @@ var MiModulo = (function() {
                 var bpMap = mapToTable(bps);
     
                 var puntosTotales = bpMap.reduce(function (acc, current) {
-                    return acc + current.npointsBp;
+                    return acc + current.points.length; // Suma la longitud de puntos
                 }, 0);
     
                 console.log("Total points:", puntosTotales);
-                $("#totalpoints").text(puntosTotales);
+                $("#totalPoints").text(puntosTotales);
             }
         });
     }
@@ -62,15 +62,33 @@ var MiModulo = (function() {
     }
 
     function mapToTable(bps) {
-        var temp = [];
+        var table = document.getElementById("blueprintTable");
+        var tbody = table.querySelector("tbody");
+    
+        // Limpiar contenido existente en la tabla
+        tbody.innerHTML = "";
+    
         for (var elemento of bps) {
-            var author = elemento.author; // Cambio de name a author
+            var author = elemento.author;
             var name = elemento.name;
             var npoints = elemento.points.length;
-            temp.push({ author: author, nameBp: name, npointsBp: npoints });
+    
+            var row = document.createElement("tr");
+            var nameCell = document.createElement("td");
+            var npointsCell = document.createElement("td");
+    
+            nameCell.textContent = name;
+            npointsCell.textContent = npoints;
+    
+            row.appendChild(nameCell);
+            row.appendChild(npointsCell);
+    
+            tbody.appendChild(row);
         }
-        return temp;
+    
+        return bps; // Devuelve bps al final de la función
     }
+    
     
     // Asignar eventos de clic después de que se cargue el DOM
     $(document).ready(function() {
