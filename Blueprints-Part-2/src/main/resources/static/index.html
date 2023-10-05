@@ -7,8 +7,8 @@
 
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/bootstrap/5.3.2/js/bootstrap.min.js"></script>
-        <script>src="js/App.js"</script>
-        <script>src="js/apimock.js"</script>
+        <script type="text/javascript" src="js/App.js"></script>
+        <script src="js/apimock.js"></script>
         <link rel="stylesheet"
         href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" />
     </head>
@@ -17,10 +17,10 @@
         <h1>Blueprints</h1>
         <label for="authorInput">Autor:</label>
         <input  type="text" id="authorName" placeholder="Escribe algo..." label="Autor">
-        <button onclick="MiModulo.setAuthorName(authorName); MiModulo.uptadeTable();" class="getPrintsButton">Get Blueprints</button>
+        <button onclick="MiModulo.setAuthorName(document.getElementById('authorName').value); MiModulo.uptadeTable();" class="getPrintsButton">Get Blueprints</button>
 
         <h2>Blueprints</h2>
-        <table className="tabla">
+        <table class="tabla">
             <tr>
               <th>Blueprint Name</th>
               <th>Number of Points</th>
@@ -37,5 +37,6 @@
               <td>Mexico</td>
             </tr>
           </table>
+          <p>Total de puntos: <span id="totalPoints">0</span></p>
     </body>
 </html>

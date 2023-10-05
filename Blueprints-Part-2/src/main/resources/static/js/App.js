@@ -31,13 +31,25 @@ var MiModulo = (function() {
     }
 
     function uptadeTable(){
-        getBlueprintsByAuthor(authorName, getBlueprints);
+        MiModulo.getBlueprintsByAuthor(authorName, getBlueprints);
     }
 
-    function getBlueprints(){
-        var bps = getBlueprintsByAuthor();
-        mapToTable(bps);
+    function getBlueprints() {
+        MiModulo.getBlueprintsByAuthor(authorName, function(bps) {
+            console.log("Received blueprints:", bps);
+            if (bps) {
+                var bpMap = mapToTable(bps);
+    
+                var puntosTotales = bpMap.reduce(function (acc, current) {
+                    return acc + current.npointsBp;
+                }, 0);
+    
+                console.log("Total points:", puntosTotales);
+                $("#totalpoints").text(puntosTotales);
+            }
+        });
     }
+    
 
     function mapAuthorAndPoints(bps){
         var temp = [];
@@ -49,18 +61,26 @@ var MiModulo = (function() {
         return temp;
     }
 
-    function mapToTable(bps){
+    function mapToTable(bps) {
+        var temp = [];
         for (var elemento of bps) {
-            $(document).ready(function(){
-                $(".getPrintsButton").click(function(){
-                    var name = elemento[0];
-                    var npoints = elemento [1];
-                    var markup = "<tr><td>" + name + "</td><td>" + npoints + "</td></tr>";
-                    $("table").append(markup);
-                });
-            });
+            var author = elemento.author; // Cambio de name a author
+            var name = elemento.name;
+            var npoints = elemento.points.length;
+            temp.push({ author: author, nameBp: name, npointsBp: npoints });
         }
+        return temp;
     }
+    
+    // Asignar eventos de clic después de que se cargue el DOM
+    $(document).ready(function() {
+        $(".getPrintsButton").click(function() {
+            var name = $(this).data("name");
+            var npoints = $(this).data("npoints");
+            var markup = "<tr><td>" + name + "</td><td>" + npoints + "</td></tr>";
+            $("table").append(markup);
+        });
+    });
 
     return {
 		getBlueprintsByAuthor:function(authname,callback){
@@ -74,13 +94,9 @@ var MiModulo = (function() {
 			callback(
 				mockdata[authname].find(function(e){return e.name===bpname})
 			);
-		}
-	}
-
-
-    // Retornar solo las funciones públicas que quieres exponer
-    return {
+		},
         getAuthorName: getAuthorName,
-        setAuthorName: setAuthorName
-    };
+        setAuthorName: setAuthorName,
+        uptadeTable: uptadeTable
+	}
 })();
