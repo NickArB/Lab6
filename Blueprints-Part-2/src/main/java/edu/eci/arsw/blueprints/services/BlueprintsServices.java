@@ -18,16 +18,22 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.annotation.ManagedBean;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 /**
  *
  * @author hcadavid
  */
-@Service
+@ManagedBean
 @Component
+@ApplicationScope
+@Service
 public class BlueprintsServices {
 
     @Autowired
